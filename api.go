@@ -1,4 +1,4 @@
-package metactapi
+package metact
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func (api *MetaCTApi) Subscribe(domain string) error {
+func (api *MetaCT) Subscribe(domain string) error {
 	u := fmt.Sprintf(SUBSCRIBED_DOMAINS_API, api.AppId)
 
 	data := url.Values{}
@@ -26,7 +26,7 @@ func (api *MetaCTApi) Subscribe(domain string) error {
 	return nil
 }
 
-func (api *MetaCTApi) Unsubscribe(domain string) error {
+func (api *MetaCT) Unsubscribe(domain string) error {
 	u := fmt.Sprintf(SUBSCRIBED_DOMAINS_API, api.AppId)
 
 	data := url.Values{}
@@ -46,7 +46,7 @@ func (api *MetaCTApi) Unsubscribe(domain string) error {
 	return nil
 }
 
-func (api *MetaCTApi) SubscribeList() (*SubscribeListResp, error) {
+func (api *MetaCT) SubscribeList() (*SubscribeListResp, error) {
 	u := fmt.Sprintf(SUBSCRIBED_DOMAINS_API, api.AppId)
 
 	data := url.Values{}
@@ -62,7 +62,7 @@ func (api *MetaCTApi) SubscribeList() (*SubscribeListResp, error) {
 	return result, nil
 }
 
-func (api *MetaCTApi) Certificates(query string, fields []string) (*CertificatesResp, error) {
+func (api *MetaCT) Certificates(query string, fields []string) (*CertificatesResp, error) {
 	f := strings.Join(fields, ",")
 
 	data := url.Values{}

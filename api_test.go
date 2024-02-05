@@ -1,4 +1,4 @@
-package metactapi
+package metact
 
 import (
 	"fmt"

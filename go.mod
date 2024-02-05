@@ -1,4 +1,4 @@
-module github.com/akakou/meta-ct-api
+module github.com/akakou/meta-ct
 
 go 1.21.4
 

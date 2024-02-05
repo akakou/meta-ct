@@ -1,4 +1,4 @@
-package metactapi
+package metact
 
 const API_BASE = "https://graph.facebook.com"
 
