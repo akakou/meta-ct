@@ -50,6 +50,5 @@ func TestActual(t *testing.T) {
 		if err != nil {
 			t.Fatalf("error unsubscribe: %v", err)
 		}
-
 	})
 }
