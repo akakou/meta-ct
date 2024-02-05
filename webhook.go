@@ -16,7 +16,7 @@ type Notification struct {
 	Object string `json:"object"`
 }
 
-func (api *MetaCT) WebHookCertificates(c echo.Context) ([]Certificate, error) {
+func (ct *MetaCT) WebHookCertificates(c echo.Context) ([]Certificate, error) {
 	var notification Notification
 	if err := c.Bind(&notification); err != nil {
 		return nil, fmt.Errorf("error parsing payload: %v", err)
