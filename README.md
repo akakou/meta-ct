@@ -1,5 +1,8 @@
 # meta-ct
 
+[![Go](https://github.com/akakou/meta-ct/actions/workflows/go.yml/badge.svg)](https://github.com/akakou/meta-ct/actions/workflows/go.yml)
+[![Go Reference](https://pkg.go.dev/badge/github.com/akakou/meta-ct.svg)](https://pkg.go.dev/github.com/akakou/meta-ct)
+
 This is a library to monitor [CT(Certificate Transparency)](https://www.rfc-editor.org/rfc/rfc9162.html) monitor library via Meta's service.
 
 This library supports:
