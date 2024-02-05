@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func (api *MetaCTApi) Subscribe(domain string) (*SubscribeResp, error) {
+func (api *MetaCTApi) Subscribe(domain string) error {
 	u := fmt.Sprintf(SUBSCRIBED_DOMAINS_API, api.AppId)
 
 	data := url.Values{}
@@ -16,17 +16,17 @@ func (api *MetaCTApi) Subscribe(domain string) (*SubscribeResp, error) {
 	result, err := fetchAPI[SubscribeResp]("POST", u, data)
 
 	if err != nil {
-		return nil, fmt.Errorf("error subscribing: %v", err)
+		return fmt.Errorf("error subscribing: %v", err)
 	}
 
 	if !result.Success {
-		return nil, fmt.Errorf("error subscribing: %v", result)
+		return fmt.Errorf("error subscribing: %v", result)
 	}
 
-	return result, nil
+	return nil
 }
 
-func (api *MetaCTApi) Unsubscribe(domain string) (*SubscribeResp, error) {
+func (api *MetaCTApi) Unsubscribe(domain string) error {
 	u := fmt.Sprintf(SUBSCRIBED_DOMAINS_API, api.AppId)
 
 	data := url.Values{}
@@ -36,14 +36,14 @@ func (api *MetaCTApi) Unsubscribe(domain string) (*SubscribeResp, error) {
 	result, err := fetchAPI[SubscribeResp]("POST", u, data)
 
 	if err != nil {
-		return nil, fmt.Errorf("error unsubscribing: %v", err)
+		return fmt.Errorf("error unsubscribing: %v", err)
 	}
 
 	if !result.Success {
-		return nil, fmt.Errorf("error unsubscribing: %v", result)
+		return fmt.Errorf("error unsubscribing: %v", result)
 	}
 
-	return result, nil
+	return nil
 }
 
 func (api *MetaCTApi) SubscribeList() (*SubscribeListResp, error) {

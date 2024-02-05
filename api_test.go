@@ -24,9 +24,8 @@ func TestActual(t *testing.T) {
 	api := NewCT(appId, accessToken)
 
 	t.Run("subscribe", func(t *testing.T) {
-		resp, err := api.Subscribe(example_domain)
+		err := api.Subscribe(example_domain)
 		assert.NoError(t, err)
-		debugPrintf("subscribe", resp)
 	})
 
 	t.Run("list", func(t *testing.T) {
@@ -46,12 +45,11 @@ func TestActual(t *testing.T) {
 	})
 
 	t.Run("unsubscribe", func(t *testing.T) {
-		resp, err := api.Unsubscribe(example_domain)
+		err := api.Unsubscribe(example_domain)
 
 		if err != nil {
 			t.Fatalf("error unsubscribe: %v", err)
 		}
 
-		debugPrintf("resp", resp)
 	})
 }
