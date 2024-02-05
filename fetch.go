@@ -55,7 +55,7 @@ func fetchAPI[T any](method string, _url string, data url.Values) (*T, error) {
 		return nil, fmt.Errorf("error reading response: %s", err)
 	}
 
-	fmt.Printf("resp body: %v\n", string(respBody))
+	// fmt.Printf("resp body", string(respBody))
 
 	resp.Body.Close()
 

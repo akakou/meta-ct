@@ -3,6 +3,7 @@ package metactapi
 import (
 	"fmt"
 	"net/url"
+	"strings"
 )
 
 func (api *MetaCTApi) Subscribe(domain string) (*SubscribeResp, error) {
@@ -53,6 +54,23 @@ func (api *MetaCTApi) SubscribeList() (*SubscribeListResp, error) {
 	data.Set("access_token", api.AccessToken)
 
 	result, err := fetchAPI[SubscribeListResp]("GET", u, data)
+
+	if err != nil {
+		return nil, fmt.Errorf("error getting certificates: %v", err)
+	}
+
+	return result, nil
+}
+
+func (api *MetaCTApi) Certificates(query string, fields []string) (*CertificatesResp, error) {
+	f := strings.Join(fields, ",")
+
+	data := url.Values{}
+	data.Set("access_token", api.AccessToken)
+	data.Set("query", query)
+	data.Set("fields", f)
+
+	result, err := fetchAPI[CertificatesResp]("GET", CERTFICATES_API, data)
 
 	if err != nil {
 		return nil, fmt.Errorf("error getting certificates: %v", err)
