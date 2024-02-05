@@ -4,12 +4,13 @@ import (
 	"fmt"
 	"os"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
-var debugPrint = false
-
 func debugPrintf(tag string, data any) {
-	if debugPrint {
+	debugPrint := os.Getenv("DEBUG_PRINT")
+	if debugPrint == "1" {
 		fmt.Printf("%v: %v\n", tag, data)
 	}
 }
@@ -22,59 +23,35 @@ func TestActual(t *testing.T) {
 
 	api := NewCT(appId, accessToken)
 
-	resp, err := api.Subscribe(example_domain)
-
-	if err != nil {
-		t.Fatalf("error subscribe: %v", err)
-	}
-
-	debugPrintf("subscribe", resp)
-
-	list, err := api.SubscribeList()
-	if err != nil {
-		t.Fatalf("error subscribe list: %v", err)
-	}
-
-	debugPrintf("list", list)
-
-	certs, err := api.Certificates(example_domain, []string{
-		"authority_key_identifier",
-		"basic_constraints",
-		"cert_hash_md5",
-		"cert_hash_sha1",
-		"cert_hash_sha256",
-		"certificate_pem",
-		"domains",
-		"extended_key_usage",
-		"extensions",
-		"issuer_name",
-		"key_usage",
-		"not_valid_after",
-		"not_valid_before",
-		"public_key_algorithm",
-		"public_key_hash_sha256",
-		"public_key_pem",
-		"public_key_size",
-		"public_key_values",
-		"serial_number",
-		"signature_algorithm",
-		"signature_value",
-		"subject_key_identifier",
-		"subject_name",
-		"version",
+	t.Run("subscribe", func(t *testing.T) {
+		resp, err := api.Subscribe(example_domain)
+		assert.NoError(t, err)
+		debugPrintf("subscribe", resp)
 	})
 
-	if err != nil {
-		t.Fatalf("error certs: %v", err)
-	}
+	t.Run("list", func(t *testing.T) {
+		list, err := api.SubscribeList()
 
-	debugPrintf("certs", certs)
+		assert.NoError(t, err)
+		debugPrintf("list", list)
+		assert.Equal(t, example_domain, list.Data[0].Domain)
+	})
 
-	resp, err = api.Unsubscribe(example_domain)
+	t.Run("certificates", func(t *testing.T) {
+		certs, err := api.Certificates(example_domain, ALL_CERTIFICATE_FIELDS)
 
-	if err != nil {
-		t.Fatalf("error unsubscribe: %v", err)
-	}
+		assert.NoError(t, err)
+		debugPrintf("certs", certs)
+		assert.Equal(t, example_domain, certs.Data[0].Domains[0])
+	})
 
-	debugPrintf("resp", resp)
+	t.Run("unsubscribe", func(t *testing.T) {
+		resp, err := api.Unsubscribe(example_domain)
+
+		if err != nil {
+			t.Fatalf("error unsubscribe: %v", err)
+		}
+
+		debugPrintf("resp", resp)
+	})
 }
