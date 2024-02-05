@@ -15,7 +15,15 @@ func TestActualSubscribe(t *testing.T) {
 	resp, err := api.Subscribe("example.com")
 
 	if err != nil {
-		t.Errorf("error subscribing: %v", err)
+		t.Fatalf("error subscribing: %v", err)
+	}
+
+	fmt.Printf("%v", resp)
+
+	resp, err = api.Unsubscribe("example.com")
+
+	if err != nil {
+		t.Fatalf("error subscribing: %v", err)
 	}
 
 	fmt.Printf("%v", resp)
