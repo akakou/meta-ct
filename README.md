@@ -4,7 +4,7 @@ This is a library to monitor [CT(Certificate Transparency)](https://www.rfc-edit
 
 This library supports:
 - [Certificate Transparency API](https://developers.facebook.com/docs/certificate-transparency-api)
-- [Certificate Webhook](https://developers.facebook.com/docs/certificate-transparency/certificates-webhook)
+- ~~[Certificate Webhook](https://developers.facebook.com/docs/certificate-transparency/certificates-webhook)~~ (ToDo)
 
 
 To use this library, you must create a `Meta App` and then obtain the `App Id` and `Acess Token`.
