@@ -1,4 +1,4 @@
-package metactapi
+package metact
 
 type SubscribeResp struct {
 	Success bool `json:"success"`
