@@ -1,13 +1,13 @@
 package metactapi
 
 type MetaCTApi struct {
-	AppId       int
+	AppId       string
 	AccessToken string
 }
 
-func NewCT(appId int, credentials string) *MetaCTApi {
+func NewCT(appId string, accessToken string) *MetaCTApi {
 	return &MetaCTApi{
 		AppId:       appId,
-		AccessToken: credentials,
+		AccessToken: accessToken,
 	}
 }
