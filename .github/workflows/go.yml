@@ -6,11 +6,7 @@ name: Go
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
 jobs:
-
   build:
     runs-on: ubuntu-latest
     steps:
@@ -26,6 +22,6 @@ jobs:
 
     - name: Test
       env:
-        META_APP_ID: ${{ secrets.MetaAppId }}
-        META_ACCESS_TOKEN: ${{ secrets.MetaAccessToken }}
+        META_APP_ID: ${{ secrets.META_APP_ID }}
+        META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
       run: go test -v ./...
