@@ -44,10 +44,10 @@ func fetchAPI[T any](method string, _url string, data url.Values) (*T, error) {
 		return nil, fmt.Errorf("error sending request: %s", err)
 	}
 
-	// // check status code
-	// if resp.StatusCode != 200 {
-	// 	return nil, fmt.Errorf("error response: %s", resp.Status)
-	// }
+	// check status code
+	if resp.StatusCode != 200 {
+		return nil, fmt.Errorf("error response: %s", resp.Status)
+	}
 
 	// read and parse response
 	respBody, err := io.ReadAll(resp.Body)
