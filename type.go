@@ -1,29 +1,5 @@
 package metact
 
-type SubscribeResp struct {
-	Success bool `json:"success"`
-}
-
-type Paging struct {
-	Cursors struct {
-		Before string `json:"before"`
-		After  string `json:"after"`
-	} `json:"causers"`
-}
-
-type KeyValue struct {
-	Key   string `json:"key"`
-	Value string `json:"value"`
-}
-
-type SubscribeListResp struct {
-	Data []struct {
-		Id     string `json:"id"`
-		Domain string `json:"domain"`
-	} `json:"data"`
-	Paging `json:"paging"`
-}
-
 type Certificate struct {
 	Id                     string     `json:"id"`
 	AuthorityKeyIdentifier string     `json:"authority_key_identifier"`
@@ -50,6 +26,30 @@ type Certificate struct {
 	SubjectKeyIdentifier   string     `json:"subject_key_identifier"`
 	SubjectName            string     `json:"subject_name"`
 	Version                int        `json:"version"`
+}
+
+type Paging struct {
+	Cursors struct {
+		Before string `json:"before"`
+		After  string `json:"after"`
+	} `json:"causers"`
+}
+
+type KeyValue struct {
+	Key   string `json:"key"`
+	Value string `json:"value"`
+}
+
+type SubscribeResp struct {
+	Success bool `json:"success"`
+}
+
+type SubscribeListResp struct {
+	Data []struct {
+		Id     string `json:"id"`
+		Domain string `json:"domain"`
+	} `json:"data"`
+	Paging `json:"paging"`
 }
 
 type CertificatesResp struct {
