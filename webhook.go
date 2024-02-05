@@ -1,4 +1,4 @@
-package metactapi
+package metact
 
 import (
 	"fmt"
@@ -16,7 +16,7 @@ type Notification struct {
 	Object string `json:"object"`
 }
 
-func (api *MetaCTApi) WebHookCertificates(c echo.Context) ([]Certificate, error) {
+func (api *MetaCT) WebHookCertificates(c echo.Context) ([]Certificate, error) {
 	var notification Notification
 	if err := c.Bind(&notification); err != nil {
 		return nil, fmt.Errorf("error parsing payload: %v", err)
