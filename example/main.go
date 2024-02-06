@@ -12,6 +12,7 @@ import (
 
 func main() {
 	e := echo.New()
+	e.Debug = true
 	appId := os.Getenv("META_APP_ID")
 	accessToken := os.Getenv("META_ACCESS_TOKEN")
 	testDomain := os.Getenv("TEST_DOMAIN")
@@ -24,13 +25,18 @@ func main() {
 	}
 
 	e.GET("/", func(c echo.Context) error {
+		challenge := c.QueryParam("hub.challenge")
+		return c.String(http.StatusOK, challenge)
+	})
+
+	e.POST("/", func(c echo.Context) error {
 		certs, err := ct.WebHookCertificates(c)
 		if err != nil {
-			c.Error(err)
+			fmt.Printf("error: %v\n", err)
 		}
 
-		fmt.Printf("certs: %v", certs)
-		return c.String(http.StatusOK, "Hello, World!")
+		fmt.Printf("certs: %v\n", certs)
+		return c.String(http.StatusOK, "ok")
 	})
 
 	err = e.Start(":1323")
