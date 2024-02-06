@@ -8,10 +8,12 @@ import (
 
 type Notification struct {
 	Entry []struct {
-		ID            string   `json:"id"`
-		ChangedFields []string `json:"changed_fields"`
-		Time          int      `json:"time"`
-		Certificate   `json:"certificate"`
+		ID      string `json:"id"`
+		Time    int    `json:"time"`
+		Changes []struct {
+			Field string      `json:"field"`
+			Value Certificate `json:"value"`
+		} `json:"changes"`
 	} `json:"entry"`
 	Object string `json:"object"`
 }
@@ -29,7 +31,9 @@ func (ct *MetaCT) WebHookCertificates(c echo.Context) ([]Certificate, error) {
 	certs := []Certificate{}
 
 	for _, entry := range notification.Entry {
-		certs = append(certs, entry.Certificate)
+		for _, change := range entry.Changes {
+			certs = append(certs, change.Value)
+		}
 	}
 
 	return certs, nil
