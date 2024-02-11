@@ -6,12 +6,12 @@ import (
 	"strings"
 )
 
-func (api *MetaCT) Subscribe(domain string) error {
-	u := fmt.Sprintf(SUBSCRIBED_DOMAINS_API, api.AppId)
+func (ct *MetaCT) Subscribe(domain string) error {
+	u := fmt.Sprintf(SUBSCRIBED_DOMAINS_API, ct.AppId)
 
 	data := url.Values{}
 	data.Set("subscribe", domain)
-	data.Set("access_token", api.AccessToken)
+	data.Set("access_token", ct.AccessToken)
 
 	result, err := fetchAPI[SubscribeResp]("POST", u, data)
 
@@ -26,12 +26,12 @@ func (api *MetaCT) Subscribe(domain string) error {
 	return nil
 }
 
-func (api *MetaCT) Unsubscribe(domain string) error {
-	u := fmt.Sprintf(SUBSCRIBED_DOMAINS_API, api.AppId)
+func (ct *MetaCT) Unsubscribe(domain string) error {
+	u := fmt.Sprintf(SUBSCRIBED_DOMAINS_API, ct.AppId)
 
 	data := url.Values{}
 	data.Set("unsubscribe", domain)
-	data.Set("access_token", api.AccessToken)
+	data.Set("access_token", ct.AccessToken)
 
 	result, err := fetchAPI[SubscribeResp]("POST", u, data)
 
@@ -46,12 +46,12 @@ func (api *MetaCT) Unsubscribe(domain string) error {
 	return nil
 }
 
-func (api *MetaCT) SubscribeList() (*SubscribeListResp, error) {
-	u := fmt.Sprintf(SUBSCRIBED_DOMAINS_API, api.AppId)
+func (ct *MetaCT) SubscribeList() (*SubscribeListResp, error) {
+	u := fmt.Sprintf(SUBSCRIBED_DOMAINS_API, ct.AppId)
 
 	data := url.Values{}
 	data.Set("fields", "domain")
-	data.Set("access_token", api.AccessToken)
+	data.Set("access_token", ct.AccessToken)
 
 	result, err := fetchAPI[SubscribeListResp]("GET", u, data)
 
@@ -62,11 +62,11 @@ func (api *MetaCT) SubscribeList() (*SubscribeListResp, error) {
 	return result, nil
 }
 
-func (api *MetaCT) Certificates(query string, fields []string) (*CertificatesResp, error) {
+func (ct *MetaCT) Certificates(query string, fields []string) (*CertificatesResp, error) {
 	f := strings.Join(fields, ",")
 
 	data := url.Values{}
-	data.Set("access_token", api.AccessToken)
+	data.Set("access_token", ct.AccessToken)
 	data.Set("query", query)
 	data.Set("fields", f)
 
