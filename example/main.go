@@ -19,6 +19,8 @@ func main() {
 
 	ct := metact.NewCT(appId, accessToken)
 	err := ct.Subscribe(testDomain)
+	list, err := ct.SubscribeList()
+	fmt.Printf("list: %v\n", list)
 
 	if err != nil {
 		fmt.Printf("error: %v", err)
